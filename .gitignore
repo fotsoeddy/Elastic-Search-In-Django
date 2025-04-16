@@ -1,31 +1,17 @@
-# .gitignore
-
 # Python
-*.pyc
 __pycache__/
-*.pyo
-*.pyd
-.Python
-env/
+*.py[cod]
+*.sqlite3
+
+# Virtual environment
 venv/
-ENV/
-env.bak/
-venv.bak/
 
 # Django
 *.log
-*.pot
-*.pyc
-*.sqlite3
-media/
-staticfiles/
+db.sqlite3
+.env
 
-# IDEs
-.idea/
+# VSCode or other editors
 .vscode/
-*.sublime-project
-*.sublime-workspace
-
-# OS
-.DS_Store
-Thumbs.db
+.idea/
+*.swp
