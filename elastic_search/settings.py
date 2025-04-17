@@ -83,7 +83,7 @@ DATABASES = {
 
 ELASTICSEARCH_DSL = {
     'default':{
-        'hosts': 'http://localhost:8000'
+        'hosts': 'http://localhost:9200'
     }
 }
 
