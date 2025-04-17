@@ -2,44 +2,102 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Product Search</title>
+  <title>Search Database</title>
   <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
-  <div class="w-full max-w-xl bg-white rounded-2xl shadow-lg p-6">
-    <h1 class="text-2xl font-semibold mb-4 text-center text-gray-800">Search Products by Name</h1>
-    
-    <form method="get" action="" class="flex gap-2">
-      <input
-        type="text"
-        name="q"
-        placeholder="Enter product name..."
-        class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-      <button
-        type="submit"
-        class="bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-700 transition"
-      >
-        Search
-      </button>
-    </form>
+  <style>
+    /* Ensure the search form stays fixed at the top */
+    .fixed-search {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background-color: white;
 
-    <!-- Display results here -->
-    {% if results %}
-      <div class="mt-6">
-        <h2 class="text-lg font-medium text-gray-700 mb-2">Search Results:</h2>
-        <ul class="space-y-2">
-          {% for product in results %}
-            <li class="border-b pb-2">
-              <p class="text-gray-900 font-semibold">{{ product.name }}</p>
-              <p class="text-gray-600 text-sm">{{ product.description|truncatewords:20 }}</p>
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
-    {% elif query %}
-      <p class="mt-6 text-gray-500 text-center">No results found for "{{ query }}"</p>
-    {% endif %}
+    }
+    /* Add padding to prevent results from overlapping with fixed form */
+    .results-container {
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 min-h-screen p-4">
+  <div class="w-full max-w-4xl mx-auto">
+    <!-- Fixed Search Form -->
+    <div class="fixed-search rounded-2xl ">
+      <!-- <h1 class="text-2xl font-semibold mb-4 text-center text-gray-800">Search Database</h1> -->
+      <form method="get" action="" class="flex gap-2">
+        <input
+          type="text"
+          name="q"
+          placeholder="Search products, suppliers, brands, or categories..."
+          class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <button
+          type="submit"
+          class="bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-700 transition"
+        >
+          Search
+        </button>
+      </form>
+    </div>
+
+    <!-- Results Container -->
+    <div class="results-container bg-white rounded-2xl shadow-lg p-6">
+      {% if products or suppliers or brands or categories %}
+        <h2 class="text-lg font-medium text-gray-700 mb-2">Search Results for "{{ query }}":</h2>
+        
+        <!-- Products -->
+        {% if products %}
+          <h3 class="text-md font-semibold text-gray-800 mt-4">Products</h3>
+          <ul class="space-y-2">
+            {% for product in products %}
+              <li class="border-b pb-2">
+                <p class="text-gray-900 font-semibold">{{ product.name }}</p>
+                <p class="text-gray-600 text-sm">{{ product.description|truncatewords:20 }}</p>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+        
+        <!-- Suppliers -->
+        {% if suppliers %}
+          <h3 class="text-md font-semibold text-gray-800 mt-4">Suppliers</h3>
+          <ul class="space-y-2">
+            {% for supplier in suppliers %}
+              <li class="border-b pb-2">
+                <p class="text-gray-900 font-semibold">{{ supplier.name }}</p>
+                <p class="text-gray-600 text-sm">Email: {{ supplier.email }} | Phone: {{ supplier.phone }}</p>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+        
+        <!-- Brands -->
+        {% if brands %}
+          <h3 class="text-md font-semibold text-gray-800 mt-4">Brands</h3>
+          <ul class="space-y-2">
+            {% for brand in brands %}
+              <li class="border-b pb-2">
+                <p class="text-gray-900 font-semibold">{{ brand.name }}</p>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+        
+        <!-- Categories -->
+        {% if categories %}
+          <h3 class="text-md font-semibold text-gray-800 mt-4">Categories</h3>
+          <ul class="space-y-2">
+            {% for category in categories %}
+              <li class="border-b pb-2">
+                <p class="text-gray-900 font-semibold">{{ category.name }}</p>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% elif query %}
+        <p class="text-gray-500 text-center">No results found for "{{ query }}"</p>
+      {% endif %}
+    </div>
   </div>
 </body>
 </html>

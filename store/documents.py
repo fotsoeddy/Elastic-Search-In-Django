@@ -2,7 +2,7 @@ from django_elasticsearch_dsl import Document, Index, fields
 from django_elasticsearch_dsl.registries import registry
 from .models import Product, Category, Brand, Supplier
 
-# Optional: define the index name
+# Define the index for products
 product_index = Index('products')
 product_index.settings(
     number_of_shards=1,
@@ -24,7 +24,7 @@ class ProductDocument(Document):
     })
 
     class Index:
-        name = 'products'  # The name of the Elasticsearch index
+        name = 'products'
 
     class Django:
         model = Product
@@ -58,7 +58,6 @@ class BrandDocument(Document):
             'name',
             'logo',
         ]
-
 
 @registry.register_document
 class SupplierDocument(Document):
