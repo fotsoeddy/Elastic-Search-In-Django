@@ -60,6 +60,9 @@ htmlcov/
 *.cover
 *.coverage.*
 
+venv/
+
+
 # Build and distribution
 build/
 dist/
