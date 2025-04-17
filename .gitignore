@@ -1,17 +1,68 @@
-# Python
+# Python/Django
+*.pyc
 __pycache__/
-*.py[cod]
+*.pyo
+*.pyd
+.Python
 *.sqlite3
-
-# Virtual environment
-venv/
-
-# Django
 *.log
-db.sqlite3
-.env
-
-# VSCode or other editors
-.vscode/
-.idea/
+*.pid
+*.seed
+*.db
 *.swp
+*.swo
+
+# Virtual Environment
+venv/
+.env
+env/
+virtualenv/
+*.venv
+
+# Django specific
+media/
+staticfiles/
+*.cache
+*.bak
+*.orig
+migrations/
+
+# Elasticsearch
+elasticsearch/
+*.dump
+*.export
+*.snapshot
+
+# IDEs and Editors
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# OS generated files
+.DS_Store
+Thumbs.db
+*.DS_Store
+
+# Sensitive files
+.env
+*.env
+*.secret
+secrets.json
+settings_local.py
+local_settings.py
+
+# Coverage and testing
+.coverage
+coverage/
+htmlcov/
+.tox/
+*.cover
+*.coverage.*
+
+# Build and distribution
+build/
+dist/
+*.egg
+*.egg-info/
+*.whl
